@@ -1,13 +1,15 @@
 <?php
 
-function obtenerServicios(){
+function obtenerServicios() : array{
     try{
         require 'database.php';
         $sql = "SELECT * FROM servicios";
         $consulta = mysqli_query($db, $sql);
-        echo "<pre>";
-        var_dump(mysqli_fetch_assoc($consulta));
-        echo "</pre>";
+        $servicios =[];
+        while($row = mysqli_fetch_assoc($consulta)){
+            $servicios[] = $row; //al final del arreglo se agrega el elemento
+        }
+        return $servicios;
     }catch(\Throwable  $th){
         var_dump ($th);
     }
